@@ -29,10 +29,10 @@ export default function FillPage() {
         setError(result);
       } else {
         setError({});
-        // await formApi.createFillApi(input);
-        console.log(input);
+        const res = await formApi.createFillApi(input);
+        console.log(res.data);
         setInput(initialInput);
-        navigate("/details");
+        navigate("/details/" + res.data.id);
       }
     } catch (err) {
       console.error(err);

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import FillPage from "../pages/FillPage";
 import Details from "../pages/Details";
+import AllDetails from "../pages/AllDetails";
 
 const router = createBrowserRouter([
   {
@@ -12,8 +13,12 @@ const router = createBrowserRouter([
         element: <FillPage />
       },
       {
-        path: "/details",
+        path: "/details/:id",
         element: <Details />
+      },
+      {
+        path: "details",
+        element: <AllDetails />
       }
     ]
   }
