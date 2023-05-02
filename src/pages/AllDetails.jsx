@@ -1,24 +1,50 @@
 import { useEffect, useState } from "react";
 import * as formApi from "../apis/form-api";
+import { useNavigate } from "react-router-dom";
 export default function Details() {
   const [details, setDetails] = useState(null);
-  console.log(details);
+  const navigate = useNavigate();
   useEffect(() => {
     (async () => {
       const res = await formApi.getAllDetailsApi();
       setDetails(res.data);
     })();
   }, []);
+  const handleClick = id => {
+    navigate("/details/" + id);
+  };
+  // const handleClick = id => () => {
+  //   navigate("/details/" + id);
+  // };
   return (
     <>
-      <h1>All Details</h1>
-      <div>
+      <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">All Details</h1>
+      <button className="mb-4" type="button" onClick={() => navigate(-1)}>
+        Back
+      </button>
+      <div className="flex gap-4">
         {details?.map(el => (
-          <div className="border border-solid border-orange-950 round-sm w-64 py-2 my-4 text-center">
-            <div>{el.firstName}</div>
-            <div>{el.lastName}</div>
-            <div>{el.email}</div>
-            <div>{el.mobile}</div>
+          <div
+            onClick={() => handleClick(el.id)}
+            // onClick={handleClick(el.id)}
+            key={el.id}
+            className="bg-orange-300 block w-96 p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer"
+          >
+            <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">Details</h1>
+            <div className="box-border border-t-4 border-black pt-2 pl-2">
+              <div className="font-medium text-xl text-slate-900">
+                First name: <span className="font-normal text-md">{el?.firstName}</span>
+              </div>
+              <div className="font-medium text-xl text-slate-900">
+                Last name: <span className="font-normal text-md">{el?.lastName}</span>
+              </div>
+              <div className="font-medium text-xl text-slate-900">
+                E-mail: <span className="font-normal text-md">{el?.email}</span>
+              </div>
+              <div className="font-medium text-xl text-slate-900">
+                Phone: <span className="font-normal text-md">{el?.mobile}</span>
+              </div>
+            </div>
           </div>
         ))}
       </div>

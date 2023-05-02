@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../components/Input";
 import validateFill from "../validators/validate-fill";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import * as formApi from "../apis/form-api";
 
 export default function FillPage() {
@@ -40,8 +40,9 @@ export default function FillPage() {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <h1>FillPage</h1>
-      <div className="h-auto w-2/6 bg-sky-300 mx-auto py-2 flex flex-col gap-y-2 px-4">
+      <h1 className="text-center">FillPage</h1>
+      <Link to="/details">To all details</Link>
+      <div className="h-auto w-2/6 rounded-md bg-sky-300 mx-auto py-2 flex flex-col gap-y-7 px-4">
         {/* <div className="flex flex-col gap-y-2 px-4 mx-auto"> */}
         <h1>hi</h1>
         <div>
@@ -80,9 +81,23 @@ export default function FillPage() {
             error={error.mobile}
           />
         </div>
-        <div>
-          <button className="text-white bg-gray-800 rounded-lg px-4" type="submit">
+        <div className="flex flex-row gap-x-10 ">
+          {/* <button className="text-white bg-gray-800 rounded-lg px-4" type="submit"> */}
+          <button
+            className="text-white w-52 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="submit"
+          >
             Send
+          </button>
+          <button
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button"
+            onClick={() => {
+              setInput(initialInput);
+              setError({});
+            }}
+          >
+            Cancel
           </button>
         </div>
       </div>
