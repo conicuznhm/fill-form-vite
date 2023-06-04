@@ -13,7 +13,16 @@ export default function Details() {
   const handleClick = id => {
     navigate("/details/" + id);
   };
-  // const handleClick = id => () => {
+
+  // #2 if need event
+  // const handleClick = (id, event) => {
+  //   console.log(event);
+  //   navigate("/details/" + id);
+  // };
+
+  // #3 if need event
+  // const handleClick = id => event => {
+  //   console.log(event);
   //   navigate("/details/" + id);
   // };
   return (
@@ -26,7 +35,8 @@ export default function Details() {
         {details?.map(el => (
           <div
             onClick={() => handleClick(el.id)}
-            // onClick={handleClick(el.id)}
+            // onClick={event => handleClick(el.id, event)}   //#2 to attach event
+            // onClick={handleClick(el.id)}                   //#3 to attach event
             key={el.id}
             className="bg-orange-300 block w-96 p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer"
           >
