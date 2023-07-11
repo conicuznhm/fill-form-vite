@@ -31,7 +31,7 @@ export default function Details() {
       <button className="mb-4" type="button" onClick={() => navigate(-1)}>
         Back
       </button>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap justify-center lg:justify-start gap-4">
         {details?.map(el => (
           <div
             onClick={() => handleClick(el.id)}
