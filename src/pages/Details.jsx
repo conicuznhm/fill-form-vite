@@ -32,7 +32,7 @@ export default function Details() {
             E-mail: <span className="font-normal text-md">{detail?.email}</span>
           </div>
           <div className="font-medium text-xl text-slate-900">
-            Phone: <span className="font-normal text-md">{detail?.mobile}</span>
+            Phone: <span className="font-normal text-md">{detail?.phone}</span>
           </div>
         </div>
       </div>

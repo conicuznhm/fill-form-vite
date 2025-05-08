@@ -9,7 +9,7 @@ export default function FillPage() {
     firstName: "",
     lastName: "",
     email: "",
-    mobile: ""
+    phone: ""
   };
   const [input, setInput] = useState(initialInput);
   const [error, setError] = useState({});
@@ -25,12 +25,17 @@ export default function FillPage() {
       e.preventDefault();
       const result = validateFill(input);
       const numError = Object.values(result).length;
+
+      // console.log(input)
+
       if (numError) {
         setError(result);
       } else {
         setError({});
         const res = await formApi.createFillApi(input);
+
         console.log(res.data);
+
         setInput(initialInput);
         navigate("/details/" + res.data.id);
       }
@@ -75,10 +80,10 @@ export default function FillPage() {
         <div>
           <Input
             placeholder="Mobile phone"
-            name="mobile"
-            value={input.mobile}
+            name="phone"
+            value={input.phone}
             onChange={handleInput}
-            error={error.mobile}
+            error={error.phone}
           />
         </div>
         <div className="flex flex-row gap-x-10 ">

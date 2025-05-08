@@ -10,8 +10,8 @@ const fillSchema = Joi.object({
   email: Joi.string().email({ tlds: false }).required().messages({
     "string.email": "Must be a valid email"
   }),
-  mobile: Joi.string()
-    .pattern(/^[0-9]{10}$/)
+  phone: Joi.string()
+    .pattern(/^[0-9]{10,15}$/)
     .required()
     .messages({
       "string.pattern.base": "Must be a phone number"
