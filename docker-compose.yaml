@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  form-vite:
+    image: form-vite:v3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: form-vite
+    networks:
+      - my-network
+    ports:
+      - "80:80"
+    # depends_on:
+    #   form-api:
+    #     condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  my-network:
+    name: my-network
+    external: true
+
+# to use podman-compose, conda activate base, pip install podman-compose
+# podman-compose up -d
+# podman-compose up --build -d
+# podman-compose down
+# podman-compose logs -f
+# podman-compose build
