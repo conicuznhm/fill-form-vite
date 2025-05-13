@@ -25,6 +25,16 @@ COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
+# //Install cloudflared
+# RUN apk add --no-cache curl
+# RUN curl -L https://github.com/cloudflare/cloudflared/releases/download/2025.4.2/cloudflared-linux-amd64 -o /usr/bin/cloudflared 
+# RUN chmod +x /usr/bin/cloudflared
+
+# //Copy start script to handle api proxy connection
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+ENTRYPOINT ["/start.sh"]
+
 
 # podman build -t form-vite:v1 .
 # podman build -t form-vite:v1 --no-cache .
