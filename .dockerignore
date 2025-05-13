@@ -5,3 +5,4 @@ docker-compose.*
 .gitignore
 nginx-fail-over.test.conf
 .vite
+old.start.sh

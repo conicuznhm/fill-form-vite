@@ -26,14 +26,24 @@ COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 # //Install cloudflared
-# RUN apk add --no-cache curl
-# RUN curl -L https://github.com/cloudflare/cloudflared/releases/download/2025.4.2/cloudflared-linux-amd64 -o /usr/bin/cloudflared 
-# RUN chmod +x /usr/bin/cloudflared
+RUN apk add --no-cache curl
+RUN curl -L https://github.com/cloudflare/cloudflared/releases/download/2025.4.2/cloudflared-linux-amd64 -o /usr/bin/cloudflared 
+RUN chmod +x /usr/bin/cloudflared
+
+# //Copy run-tunnel script
+COPY run-tunnel.sh /run-tunnel.sh
+RUN chmod +x /run-tunnel.sh
 
 # //Copy start script to handle api proxy connection
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
-ENTRYPOINT ["/start.sh"]
+# ENTRYPOINT ["/start.sh"]
+
+# //Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 
 # podman build -t form-vite:v1 .
