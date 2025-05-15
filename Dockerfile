@@ -37,7 +37,6 @@ RUN chmod +x /run-tunnel.sh
 # //Copy start script to handle api proxy connection
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
-# ENTRYPOINT ["/start.sh"]
 
 # //Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh

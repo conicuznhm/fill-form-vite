@@ -1,5 +1,9 @@
 #!/bin/sh
 set -e
+# sh script only check for DNS reslover for form-api ip version
+# not include(load) cloudflared and not auto run cloudflared tunnel --url
+# to use this old.entrypoint.sh, 1st rename the previous entrypoint.sh to test.entrypoint.sh 
+# 2nd rename old.entrypoint.sh to entrypoint.sh,
 
 # Function to check if form-api is ready
 wait_for_form_api() {
