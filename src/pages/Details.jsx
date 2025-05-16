@@ -10,8 +10,13 @@ export default function Details() {
 
   useEffect(() => {
     const fetch = async params => {
-      const res = await formApi.getDetailApi(params);
-      setDetail(res.data);
+      try {
+        const res = await formApi.getContactApi(params);
+        setDetail(res.data);
+      } catch (error) {
+        console.error(error.message);
+        console.error(error.response.data);
+      }
     };
     // fetch(params.id)
     fetch(id);

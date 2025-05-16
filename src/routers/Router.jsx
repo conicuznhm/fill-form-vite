@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import FillPage from "../pages/FillPage";
 import Details from "../pages/Details";
-import AllDetails from "../pages/AllDetails";
+import AllContacts from "../pages/AllContacts";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       },
       {
         path: "details",
-        element: <AllDetails />
+        element: <AllContacts />
       }
     ]
   }

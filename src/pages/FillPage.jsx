@@ -32,15 +32,14 @@ export default function FillPage() {
         setError(result);
       } else {
         setError({});
-        const res = await formApi.createFillApi(input);
-
-        console.log(res.data);
-
+        const res = await formApi.createContactApi(input);
+        // console.log(res.data?.id);
         setInput(initialInput);
         navigate("/details/" + res.data.id);
       }
     } catch (err) {
-      console.error(err);
+        console.error(err.message);
+        console.error(err.response.data);
     }
   };
   return (
