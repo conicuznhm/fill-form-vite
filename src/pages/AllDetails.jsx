@@ -24,29 +24,41 @@ export default function Details() {
   }
 ]);
 
-  const [originDetail, setOriginDetail] = useState({});
+  const [originDetail, setOriginDetail] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
   const handleEdit = el => {
-    setOriginDetail({...el})
-    setIsEditing(true);
-    setEditingId(el.id)
+    setOriginDetail([...details]);
+    setIsEditing(!isEditing);
+    setEditingId(el.id);
   };
 
-  const handleCancel = () => {};
+  const handleSave = () => {};
+
+  const handleCancel = () => {
+    setDetails([...originDetail]);
+    setIsEditing(false);
+  };
   
   const handleChange = (e,id) => {
     const {name, value} = e.target;
-    setDetails(prev => (
-      prev.map(item =>(
-        item.id===id? {...item,[name]:value} : item
+    setDetails(prevDetail => (
+      prevDetail.map(item => (
+        item.id === id? {...item,[name]:value} : item
       ))
     ));
   };
   
-  const handleDelete = () => {};
+  const handleDelete = (id) => {
+    setDetails(prevDetail => (
+      prevDetail.filter(item => (
+        item.id !== id
+      ))
+    ))
+  };
+
   /////////////////////////////
   const navigate = useNavigate();
   useEffect(() => {
@@ -55,6 +67,7 @@ export default function Details() {
       setDetails(res.data);
     })();
   }, []);
+
   const handleClick = id => {
     navigate("/details/" + id);
   };
@@ -91,7 +104,7 @@ export default function Details() {
             {isHovering && (
               <>
                 <button
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(el.id)}
                   className="absolute top-2 right-2 text-grey-500 hover:text-red-800 transition-colors"
                 >
                   <X size={20}/>
@@ -100,7 +113,7 @@ export default function Details() {
                 <button
                   onClick={() => handleEdit(el)}
                   className="absolute top-2 left-2 text-grey-500 hover:text-red-800 transition-colors"
-                  disabled={isEditing}
+                  // disabled={isEditing}
                 >
                   <Edit2 size={20}/>
                 </button>
@@ -118,8 +131,7 @@ export default function Details() {
                       value={el?.firstName}
                       onChange={(e) => handleChange(e,el.id)}
                       // error={error.firstName}
-                      // className="text-sm rounded-lg block w-full p-1 bg-orange-300 hover:bg-gray-100"
-                      className="text-sm rounded-lg block w-full p-1"
+                      className="text-base rounded-lg block w-full h-5 p-1"
                     />
                   </div>
                 ) : (
@@ -136,7 +148,7 @@ export default function Details() {
                       value={el?.lastName}
                       onChange={(e) => handleChange(e,el.id)}
                       // error={error.lastName}
-                      className="text-sm rounded-lg block w-full p-1"
+                      className="text-base rounded-lg block w-full h-5 p-1"
                     />
                   </div>
                 ) : (
@@ -144,12 +156,58 @@ export default function Details() {
                 )}
               </div>
               <div className="font-medium text-xl text-slate-900">
-                E-mail: <span className="font-normal text-md">{el?.email}</span>
+                {editingId===el.id && isEditing? (
+                  <div className="flex items-center space-x-2 space-y-0.5">
+                    <p>E-mail:</p>
+                    <Input
+                      type="text"
+                      name="email"
+                      value={el?.email}
+                      onChange={(e) => handleChange(e,el.id)}
+                      // error={error.email}
+                      className="text-base rounded-lg block w-full h-5 p-1"
+                    />
+                  </div>
+                ) : (
+                  <p>E-mail: <span className="font-normal text-md">{el?.email}</span></p>
+                )}
               </div>
               <div className="font-medium text-xl text-slate-900">
-                Phone: <span className="font-normal text-md">{el?.phone}</span>
+                {editingId===el.id && isEditing? (
+                  <div className="flex items-center space-x-2 space-y-0.5">
+                    <p>Phone:</p>
+                    <Input
+                      type="text"
+                      name="phone"
+                      value={el?.phone}
+                      onChange={(e) => handleChange(e,el.id)}
+                      // error={error.phone}
+                      className="text-base rounded-lg block w-full h-5 p-0.5"
+                    />
+                  </div>
+                ) : (
+                  <p>Phone: <span className="font-normal text-md">{el?.phone}</span></p>
+                )}
               </div>
             </div>
+
+            {editingId===el.id && isEditing && (
+              <div className="flex flex-end space-x-1">
+                <button
+                  onClick={handleCancel}
+                  className="absolute bottom right-1 px-2 py-0.3 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+                >
+                  Cancel  
+                </button>
+
+                <button
+                  onClick={handleSave}
+                  className="absolute bottom right-20 px-2 py-0.3 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+                >
+                  Ok
+                </button>
+              </div>
+            )}
           </div>
         ))}
       </div>
