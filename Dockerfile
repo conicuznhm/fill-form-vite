@@ -45,11 +45,15 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 
-# podman build -t form-vite:v1 .
-# podman build -t form-vite:v1 --no-cache .
-# podman run --name form-vite -p 9090:80 -d form-vite:v1
+# podman build -t form-vite:v6 .
+# podman build -t form-vite:v6 --no-cache .
+
+# //to specify a network name  (network name = my-network), 
+# //in this setting(use container name to connect) form-psql, form-api, form-vite need to be in the same network(my-network) 
+
+# podman run --name form-vite --network my-network -p 80:80 -d form-vite:v6
 
 
-# //to specify a custom-net as network
-# podman run --name form-vite --network my-network -p 80:80 -d form-vite:v2
+
 # podman run --name form-vite -p 80:80 -d form-vite:v1
+# podman run --name form-vite -p 9090:80 -d form-vite:v1
