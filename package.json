@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "serve -s dist",
+    "start":"http-server dist",
+    "serve": "serve -s dist",
     "dev": "vite",
     "build": "vite build --mode production",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",

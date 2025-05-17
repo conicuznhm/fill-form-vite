@@ -15,7 +15,7 @@ export default function AllContacts() {
  
     return (
         <>
-            <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">All Details</h1>
+            <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">All Contancts</h1>
                 <button className="mb-4" type="button" onClick={() => navigate(-1)}>
                     Back
                 </button>
