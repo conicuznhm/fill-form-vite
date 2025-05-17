@@ -38,8 +38,14 @@ export default function FillPage() {
         navigate("/details/" + res.data.id);
       }
     } catch (err) {
-        console.error(err.message);
-        console.error(err.response.data);
+        console.error("Error message:", error.message);
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Status code:", error.response.status);
+        } else {
+          // In case, error is not from Axios
+          console.error("Unexpected error:", error);
+        }
     }
   };
   return (

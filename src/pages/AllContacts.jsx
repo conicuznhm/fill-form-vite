@@ -8,8 +8,19 @@ export default function AllContacts() {
   const navigate = useNavigate();  
   useEffect(() => {
     (async () => {
-      const res = await formApi.getAllContactsApi();
-      setDetails(res.data);
+      try {
+        const res = await formApi.getAllContactsApi();
+        setDetails(res.data);
+      } catch (error) {
+        console.error("Error message:", error.message);
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Status code:", error.response.status);
+        } else {
+          // In case, error is not from Axios
+          console.error("Unexpected error:", error);
+        }
+      }
     })();
   }, []);
  

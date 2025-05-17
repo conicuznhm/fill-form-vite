@@ -85,8 +85,14 @@ export default function ContactCard({
           setEditingId(null); // Exit edit mode 
         }
       } catch (error) {
-          console.error(error.message);
-          console.error(error.response.data);
+          console.error("Error message:", error.message);
+          if (error.response) {
+            console.error("Response data:", error.response.data);
+            console.error("Status code:", error.response.status);
+          } else {
+            // In case, error is not from Axios
+            console.error("Unexpected error:", error);
+          }
       } finally {
           setIsLoading(false);
       }
@@ -115,8 +121,14 @@ export default function ContactCard({
               onDelete(contact.id)
             }
         } catch (error) {
-            console.error(error.message);
-            console.error(error.response.data);
+          console.error("Error message:", error.message);
+          if (error.response) {
+            console.error("Response data:", error.response.data);
+            console.error("Status code:", error.response.status);
+          } else {
+            // In case, error is not from Axios
+            console.error("Unexpected error:", error);
+          }
         } finally {
           setIsLoading(false);
         }
