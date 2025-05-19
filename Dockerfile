@@ -54,6 +54,15 @@ ENTRYPOINT ["/entrypoint.sh"]
 # podman run --name form-vite --network my-network -p 80:80 -d form-vite:v6
 
 
+# to push image to ghcr.io     :1 != :v1
+# podman login ghcr.io
+# podman tag form-vite:1  ghcr.io/conicuznhm/form-vite:1
+# podman push ghcr.io/conicuznhm/form-vite:1
+
+
+# //to pull image
+# podman pull ghcr.io/conicuznhm/form-vite:1
+
 
 # podman run --name form-vite -p 80:80 -d form-vite:v1
 # podman run --name form-vite -p 9090:80 -d form-vite:v1
